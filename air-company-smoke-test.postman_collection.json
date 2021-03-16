@@ -1,0 +1,651 @@
+{
+	"info": {
+		"_postman_id": "0aedd889-c70e-43d5-8a4e-3bacd0a1f409",
+		"name": "air-company-smoke-test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create air company",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseData = pm.response.json();\r",
+							"var timeout = 2000;\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Company type is correct\", function () {\r",
+							"    pm.expect(responseData.companyType).to.eql(\"INTERNATIONAL\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Company name is correct\", function () {\r",
+							"    pm.expect(responseData.name).to.eql(\"TestAirCompany\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than \" + timeout + \"ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(timeout);\r",
+							"});\r",
+							"\r",
+							"pm.collectionVariables.set(\"airCompanyId\", responseData.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"airCompanyType\": \"INTERNATIONAL\",\r\n  \"name\": \"TestAirCompany\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8091/air-company/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8091",
+					"path": [
+						"air-company",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create alternative air company",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseData = pm.response.json();\r",
+							"var timeout = 2000;\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Company type is correct\", function () {\r",
+							"    pm.expect(responseData.companyType).to.eql(\"INTERNATIONAL\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Company name is correct\", function () {\r",
+							"    pm.expect(responseData.name).to.eql(\"AlternativeAirCompany\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than \" + timeout + \"ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(timeout);\r",
+							"});\r",
+							"\r",
+							"pm.collectionVariables.set(\"alternativeAirCompanyId\", responseData.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"airCompanyType\": \"INTERNATIONAL\",\r\n  \"name\": \"AlternativeAirCompany\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8091/air-company/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8091",
+					"path": [
+						"air-company",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update air company",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseData = pm.response.json();\r",
+							"var timeout = 2000;\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Company type is correct\", function () {\r",
+							"    pm.expect(responseData.companyType).to.eql(\"REGIONAL\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Company name is correct\", function () {\r",
+							"    pm.expect(responseData.name).to.eql(\"UpdatedAirCompany\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than \" + timeout + \"ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(timeout);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"airCompanyType\": \"REGIONAL\",\r\n  \"name\": \"UpdatedAirCompany\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8091/air-company/update?airCompanyId={{airCompanyId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8091",
+					"path": [
+						"air-company",
+						"update"
+					],
+					"query": [
+						{
+							"key": "airCompanyId",
+							"value": "{{airCompanyId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get air company by id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseData = pm.response.json();\r",
+							"var timeout = 2000;\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Company type is correct\", function () {\r",
+							"    pm.expect(responseData.companyType).to.eql(\"REGIONAL\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Company name is correct\", function () {\r",
+							"    pm.expect(responseData.name).to.eql(\"UpdatedAirCompany\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than \" + timeout + \"ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(timeout);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8091/air-company/{{airCompanyId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8091",
+					"path": [
+						"air-company",
+						"{{airCompanyId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create airplane",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseData = pm.response.json();\r",
+							"var timeout = 2000;\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Airplane name is correct\", function () {\r",
+							"    pm.expect(responseData.name).to.eql(\"TestAirplane\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Airplane fuel capacity is correct\", function () {\r",
+							"    pm.expect(responseData.fuelCapacity).to.eql(1000);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Airplane air company id is correct\", function () {\r",
+							"    pm.expect(responseData.airCompany.id).to.eql(pm.variables.get(\"airCompanyId\"));\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than \" + timeout + \"ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(timeout);\r",
+							"});\r",
+							"\r",
+							"pm.collectionVariables.set(\"airplaneId\", responseData.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"airCompanyId\": {{airCompanyId}},\r\n  \"fuelCapacity\": 1000,\r\n  \"name\": \"TestAirplane\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8091/airplane/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8091",
+					"path": [
+						"airplane",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Change airplane company",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseData = pm.response.json();\r",
+							"var timeout = 2000;\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Airplane name is correct\", function () {\r",
+							"    pm.expect(responseData.name).to.eql(\"TestAirplane\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Airplane fuel capacity is correct\", function () {\r",
+							"    pm.expect(responseData.fuelCapacity).to.eql(1000);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Airplane air company id is correct\", function () {\r",
+							"    pm.expect(responseData.airCompany.id).to.eql(pm.variables.get(\"alternativeAirCompanyId\"));\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than \" + timeout + \"ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(timeout);\r",
+							"});\r",
+							"\r",
+							"pm.collectionVariables.set(\"airplaneId\", responseData.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8091/airplane/update/{{airplaneId}}?airCompanyId={{alternativeAirCompanyId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8091",
+					"path": [
+						"airplane",
+						"update",
+						"{{airplaneId}}"
+					],
+					"query": [
+						{
+							"key": "airCompanyId",
+							"value": "{{alternativeAirCompanyId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create flight",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseData = pm.response.json();\r",
+							"var timeout = 2000;\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Airplane id is correct\", function () {\r",
+							"    pm.expect(responseData.airplane.id).to.eql(pm.variables.get(\"airplaneId\"));\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Air company id is correct\", function () {\r",
+							"    pm.expect(responseData.airCompany.id).to.eql(pm.variables.get(\"alternativeAirCompanyId\"));\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Flight status is correct\", function () {\r",
+							"    pm.expect(responseData.flightStatus).to.eql(\"PENDING\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than \" + timeout + \"ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(timeout);\r",
+							"});\r",
+							"\r",
+							"pm.collectionVariables.set(\"flightId\", responseData.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"airCompanyId\": {{alternativeAirCompanyId}},\r\n  \"airplaneId\": {{airplaneId}},\r\n  \"destinationCountry\": \"USA\",\r\n  \"distance\": 5000,\r\n  \"estimatedFlightTime\": 10\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8091/flight/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8091",
+					"path": [
+						"flight",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Change flight status",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseData = pm.response.json();\r",
+							"var timeout = 2000;\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Airplane id is correct\", function () {\r",
+							"    pm.expect(responseData.airplane.id).to.eql(pm.variables.get(\"airplaneId\"));\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Air company id is correct\", function () {\r",
+							"    pm.expect(responseData.airCompany.id).to.eql(pm.variables.get(\"alternativeAirCompanyId\"));\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Flight status is correct\", function () {\r",
+							"    pm.expect(responseData.flightStatus).to.eql(\"ACTIVE\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than \" + timeout + \"ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(timeout);\r",
+							"});\r",
+							"\r",
+							"pm.collectionVariables.set(\"flightId\", responseData.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8091/flight/{{flightId}}/change-status?Flight status=ACTIVE",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8091",
+					"path": [
+						"flight",
+						"{{flightId}}",
+						"change-status"
+					],
+					"query": [
+						{
+							"key": "Flight status",
+							"value": "ACTIVE"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all completed flights with flight time more than estimated",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseData = pm.response.json();\r",
+							"var timeout = 2000;\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"List contains correct flights\", function () {\r",
+							"    pm.expect(responseData[0].id).to.eql(3),\r",
+							"    pm.expect(responseData[1].id).to.eql(5),\r",
+							"    pm.expect(responseData[2].id).to.eql(8);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than \" + timeout + \"ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(timeout);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8091/flight/flights-completed",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8091",
+					"path": [
+						"flight",
+						"flights-completed"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find all air company flights by status",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseData = pm.response.json();\r",
+							"var timeout = 2000;\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"List contains correct flights\", function () {\r",
+							"    pm.expect(responseData).length(1),\r",
+							"    pm.expect(responseData[0].id).to.eql(2);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than \" + timeout + \"ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(timeout);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8091/flight/flights-by-status?Company name=LUFTHANSA&Flight status=ACTIVE",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8091",
+					"path": [
+						"flight",
+						"flights-by-status"
+					],
+					"query": [
+						{
+							"key": "Company name",
+							"value": "LUFTHANSA"
+						},
+						{
+							"key": "Flight status",
+							"value": "ACTIVE"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all flights started more than 24 hours ago",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var responseData = pm.response.json();\r",
+							"var timeout = 2000;\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"List contains correct flights\", function () {\r",
+							"    pm.expect(responseData).length(2),\r",
+							"    pm.expect(responseData[0].id).to.eql(2),\r",
+							"    pm.expect(responseData[1].id).to.eql(7);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than \" + timeout + \"ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(timeout);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8091/flight/flights-log",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8091",
+					"path": [
+						"flight",
+						"flights-log"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "airCompanyId",
+			"value": ""
+		},
+		{
+			"key": "airplaneId",
+			"value": ""
+		},
+		{
+			"key": "alternativeAirCompanyId",
+			"value": ""
+		},
+		{
+			"key": "flightId",
+			"value": ""
+		}
+	]
+}
